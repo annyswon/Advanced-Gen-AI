@@ -3,8 +3,13 @@
 ![Hugging Face Space](screenshot_hf_app.png)
 
 ## Project Overview
-This project implements a **Customer Support Chatbot** that can answer questions from company documents and car manuals, and if no answer is found, it allows the user to create a **support ticket**.  
-The system runs **fully self-hosted** on Hugging Face Spaces using **Streamlit** and Python.  
+This project implements a **Customer Support Chatbot** that answers questions from company documents and car manuals.  
+If no answer is found, it allows the user to create a **support ticket**.  
+The solution is deployed on **Hugging Face Spaces** and built entirely with Python and Streamlit.  
+
+**Live Demo:**  
+[https://huggingface.co/spaces/AnnaSurkova/customer-support-chatbot](https://huggingface.co/spaces/AnnaSurkova/customer-support-chatbot)
+
 
 The chatbot:
 - Answers questions directly from PDF manuals and company documents.  
