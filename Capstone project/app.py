@@ -1,101 +1,194 @@
-import streamlit as st
-import pandas as pd
-import PyPDF2
+# --- Make Streamlit write to a writable path on HF Spaces ---
 import os
+os.environ["STREAMLIT_GLOBAL_DATA_DIR"] = "/tmp/.streamlit"
+os.environ["XDG_CACHE_HOME"] = "/tmp"
+os.environ["STREAMLIT_CACHE_DIR"] = "/tmp/streamlit-cache"
+os.makedirs("/tmp/.streamlit", exist_ok=True)
+os.makedirs("/tmp/streamlit-cache", exist_ok=True)
 
-DATA_DIR = "data"
-TICKET_FILE = "tickets.csv"
+import re
+import pandas as pd
+import streamlit as st
+import PyPDF2
 
-# Load docs
+# ---- Paths ----
+DATA_DIR = "data"                # your repo's data folder (read-only on Spaces)
+TICKET_FILE = "/tmp/tickets.csv" # writable on Spaces
+
+# ---- Helpers ----
+def _excerpt(text: str, query: str, window: int = 280) -> str:
+    """Return a short excerpt around the first match of query."""
+    if not text:
+        return ""
+    pattern = re.compile(re.escape(query), re.IGNORECASE)
+    m = pattern.search(text)
+    if not m:
+        return text[:window].strip().replace("\n", " ")
+    start = max(0, m.start() - window // 2)
+    end = min(len(text), m.end() + window // 2)
+    snippet = text[start:end].strip().replace("\n", " ")
+    return snippet
+
+@st.cache_resource(show_spinner=False)
 def load_pdfs():
+    """Load all PDFs from data/ into memory as {filename: [(page, text), ...]}."""
     docs = {}
-    for fname in os.listdir(DATA_DIR):
+    for fname in sorted(os.listdir(DATA_DIR)):
         if fname.lower().endswith(".pdf"):
             path = os.path.join(DATA_DIR, fname)
-            reader = PyPDF2.PdfReader(path)
+            try:
+                reader = PyPDF2.PdfReader(path)
+            except Exception as e:
+                st.warning(f"Could not open {fname}: {e}")
+                continue
             pages = []
             for i, page in enumerate(reader.pages):
-                text = page.extract_text() or ""
-                pages.append((i+1, text))
+                try:
+                    text = page.extract_text() or ""
+                except Exception:
+                    text = ""
+                pages.append((i + 1, text))
             docs[fname] = pages
     return docs
 
+@st.cache_resource(show_spinner=False)
 def load_texts():
-    texts = {}
-    for fname in os.listdir(DATA_DIR):
+    """Load .txt/.md files from data/ into memory as {filename: text}."""
+    out = {}
+    for fname in sorted(os.listdir(DATA_DIR)):
         if fname.lower().endswith((".txt", ".md")):
             path = os.path.join(DATA_DIR, fname)
-            with open(path, "r", encoding="utf-8", errors="ignore") as f:
-                texts[fname] = f.read()
-    return texts
+            try:
+                with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                    out[fname] = f.read()
+            except Exception as e:
+                st.warning(f"Could not read {fname}: {e}")
+    return out
 
-pdf_docs = load_pdfs()
-text_docs = load_texts()
+def search_docs(query: str, pdf_docs: dict, text_docs: dict, max_hits: int = 4):
+    """Naive keyword search across PDFs and text files. Returns list of results."""
+    q = query.strip()
+    if not q:
+        return []
 
-# Simple search (naive keyword match)
-def search_docs(query):
     results = []
+    # PDFs: return first matches per document (limit total)
     for fname, pages in pdf_docs.items():
         for page_num, text in pages:
-            if query.lower() in text.lower():
-                results.append((fname, page_num, text[:300]))
-    for fname, text in text_docs.items():
-        if query.lower() in text.lower():
-            results.append((fname, None, text[:300]))
+            if q.lower() in (text or "").lower():
+                results.append({
+                    "source": fname,
+                    "page": page_num,
+                    "snippet": _excerpt(text, q)
+                })
+                break  # one hit per PDF is enough for this simple demo
+        if len(results) >= max_hits:
+            break
+
+    # Text/Markdown
+    if len(results) < max_hits:
+        for fname, text in text_docs.items():
+            if q.lower() in (text or "").lower():
+                results.append({
+                    "source": fname,
+                    "page": None,
+                    "snippet": _excerpt(text, q)
+                })
+            if len(results) >= max_hits:
+                break
+
     return results
 
-# Ticket system
-def create_ticket(name, email, summary, description):
-    new_ticket = {
-        "name": name,
-        "email": email,
-        "summary": summary,
-        "description": description
+def create_ticket(name: str, email: str, summary: str, description: str) -> str:
+    """Append a support ticket row to /tmp/tickets.csv."""
+    row = {
+        "name": name.strip(),
+        "email": email.strip(),
+        "summary": summary.strip(),
+        "description": description.strip(),
     }
     if os.path.exists(TICKET_FILE):
         df = pd.read_csv(TICKET_FILE)
     else:
         df = pd.DataFrame(columns=["name", "email", "summary", "description"])
-    df = pd.concat([df, pd.DataFrame([new_ticket])], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
     df.to_csv(TICKET_FILE, index=False)
+    return f"Ticket saved to {TICKET_FILE}"
 
-# ---- Streamlit UI ----
-st.title("💬 Customer Support Chatbot")
+# ---- UI ----
+st.set_page_config(page_title="Customer Support Chatbot", page_icon="💬", layout="wide")
+st.title("Customer Support Chatbot")
 
+with st.sidebar:
+    st.subheader("About")
+    st.write("Answers questions from documents in the `/data` folder. "
+             "If an answer is not found, you can create a support ticket.")
+    st.write("Tickets are stored in a CSV file at `/tmp/tickets.csv`.")
+    # Show available files
+    st.subheader("Loaded documents")
+    try:
+        st.write(sorted(os.listdir(DATA_DIR)))
+    except FileNotFoundError:
+        st.error("`data/` folder not found. Please add your PDFs and .md/.txt files.")
+
+# Load docs (cached)
+pdf_docs = load_pdfs()
+text_docs = load_texts()
+
+# Conversation history
 if "history" not in st.session_state:
     st.session_state.history = []
+if "pending_ticket" not in st.session_state:
+    st.session_state.pending_ticket = None
 
-user_input = st.chat_input("Ask a question...")
-
-if user_input:
-    st.session_state.history.append(("user", user_input))
-    results = search_docs(user_input)
-    if results:
-        answer = "I found some info:\n"
-        for r in results[:2]:
-            source = f"{r[0]} p.{r[1]}" if r[1] else r[0]
-            answer += f"- **{source}** → {r[2]}...\n"
-    else:
-        answer = "I couldn’t find an answer. Would you like to create a support ticket?"
-        st.session_state.pending_ticket = user_input
-    st.session_state.history.append(("bot", answer))
-
-# Show chat history
+# Render history
 for role, msg in st.session_state.history:
     with st.chat_message(role):
         st.markdown(msg)
 
-# Ticket form if needed
-if "pending_ticket" in st.session_state:
+# Chat input
+user_q = st.chat_input("Ask a question about the manuals or company info…")
+if user_q:
+    st.session_state.history.append(("user", user_q))
+    with st.chat_message("user"):
+        st.markdown(user_q)
+
+    with st.chat_message("assistant"):
+        with st.spinner("Searching documents…"):
+            hits = search_docs(user_q, pdf_docs, text_docs, max_hits=4)
+
+        if hits:
+            lines = ["I found the following references:"]
+            for h in hits:
+                cite = f"**{h['source']}**"
+                if h["page"]:
+                    cite += f" p.{h['page']}"
+                lines.append(f"- {cite}: {h['snippet']} …")
+            answer = "\n".join(lines)
+            st.markdown(answer)
+            st.session_state.history.append(("assistant", answer))
+        else:
+            answer = ("I couldn’t find this in the current documents. "
+                      "Would you like to create a support ticket?")
+            st.markdown(answer)
+            st.session_state.history.append(("assistant", answer))
+            st.session_state.pending_ticket = user_q
+
+# Ticket form
+if st.session_state.pending_ticket:
     st.divider()
     st.subheader("Create Support Ticket")
     with st.form("ticket_form"):
         name = st.text_input("Your name")
         email = st.text_input("Your email")
-        summary = st.text_input("Summary", st.session_state.pending_ticket[:50])
-        desc = st.text_area("Description", st.session_state.pending_ticket)
-        submit = st.form_submit_button("Submit")
-        if submit:
-            create_ticket(name, email, summary, desc)
-            st.success("✅ Ticket created successfully!")
-            del st.session_state.pending_ticket
+        summary = st.text_input("Summary (title)", st.session_state.pending_ticket[:80])
+        description = st.text_area(
+            "Description",
+            f"User question:\n{st.session_state.pending_ticket}\n\n"
+            "Additional details:"
+        )
+        submit = st.form_submit_button("Submit ticket")
+    if submit:
+        msg = create_ticket(name, email, summary, description)
+        st.success(msg)
+        st.session_state.pending_ticket = None
