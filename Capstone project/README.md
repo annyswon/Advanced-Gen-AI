@@ -1,52 +1,69 @@
-# Capstone Project – Customer Support Chatbot
+# Customer Support Chatbot
 
-## Objective
-The objective of this project is to build a customer support solution that can answer user questions from internal documents and, if an answer is not found, allow the user to create a support ticket. The system is designed to run locally or in a deployed environment such as Hugging Face Spaces using Streamlit.
+![Hugging Face Space](screenshot_hf_app.png)
+
+## Project Overview
+This project implements a **Customer Support Chatbot** that can answer questions from company documents and car manuals, and if no answer is found, it allows the user to create a **support ticket**.  
+The system runs **fully self-hosted** on Hugging Face Spaces using **Streamlit** and Python.  
+
+The chatbot:
+- Answers questions directly from PDF manuals and company documents.  
+- Cites the **document name and page number** when an answer is found.  
+- If no answer is found, suggests creating a **support ticket** (saved into a CSV or integrated into issue trackers).  
+- Keeps **conversation history** during the session.  
+- Knows about the company (name, contact info).  
 
 ---
 
-## Business Features
-- Web-based chat where users can ask questions and receive answers from company documents.  
-- Answers are always cited with the document name and page number.  
-- If no answer is found, the system suggests creating a support ticket.  
-- Users can create a support ticket by providing their name, email, a summary (title), and a detailed description.  
-- Support tickets are stored in a CSV file, serving as a simple issue tracker.  
-- Conversation history is preserved within the session, so the system keeps context.  
-- The AI has access to company information such as name, email, and phone number from `company_info.md`.
+## Tools and Technologies
+- **Language:** Python 3.11  
+- **Framework:** Streamlit (web UI)  
+- **Deployment:** Hugging Face Spaces (CPU free tier)  
+- **Libraries:**  
+  - PyPDF2 (PDF parsing)  
+  - Pandas (ticket logging, CSV export)  
+  - Streamlit (UI and chatbot logic)  
 
 ---
 
 ## Data Sources
-At least three documents are used as knowledge sources:
-
-1. **Ford-F-150-Owners-Manual.pdf**  
-   - PDF document, over 400 pages  
-   - Satisfies the requirement for one large document  
-
-2. **porsche-2017-macan-Owners-Manual.pdf**  
-   - PDF document, ~150 pages  
-   - Serves as a second supporting PDF  
-
-3. **company_info.md**  
-   - Markdown document containing company details such as contact information  
-
-(Optional) An additional `faq.txt` file can be included with common questions and answers for faster responses.
+At least 3 documents are used as required:
+1. `Ford-F-150-Owners-Manual.pdf` (400+ pages ✅)  
+2. `porsche-2017-macan-Owners-Manual.pdf` (PDF ✅)  
+3. `company_info.md` (company background & contacts)  
+4. `faq.txt` (optional Q&A dataset)  
 
 ---
 
-## Technical Requirements
-- Implemented in **Python**  
-- Dependencies listed in `requirements.txt`  
-- Python version specified in `runtime.txt`  
-- Document parsing uses `PyPDF2`  
-- Ticket storage uses `pandas`  
-- Web interface built with **Streamlit**  
-- Deployable to Hugging Face Spaces
+## Requirements Verification
+
+✔ **Business Features**  
+- User can ask questions via web chat.  
+- Answers come from local documents (PDFs, markdown, text).  
+- If no answer is found, the system suggests creating a **support ticket**.  
+- Support tickets include: user name, email, summary, description.  
+- Tickets stored locally (`tickets.csv`) — can be extended to Jira/Trello/GitHub Issues.  
+- System cites **document + page** when answering.  
+- Conversation history is supported.  
+- Company info is integrated (`company_info.md`).  
+
+✔ **Data Requirements**  
+- At least 3 data sources.  
+- At least 2 PDFs.  
+- One PDF has 400+ pages (Ford manual).  
+
+✔ **Technical Requirements**  
+- Built with Python.  
+- Requirements listed in `requirements.txt`.  
+- Runs with vector-like search over documents (string matching / can be extended to FAISS).  
+- Interface built in **Streamlit**.  
+- Hosted on **Hugging Face Spaces**.  
 
 ---
 
-## Running Locally
-1. Clone the repository and navigate into the project folder.  
-2. Create a virtual environment and install dependencies:
-   ```bash
-   pip install -r requirements.txt
+## How to Run Locally
+```bash
+git clone https://github.com/<your-username>/customer-support-chatbot.git
+cd customer-support-chatbot
+pip install -r requirements.txt
+streamlit run app.py
