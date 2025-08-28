@@ -1,3 +1,4 @@
-streamlit
-PyPDF2
-pandas
+streamlit==1.37.1
+PyPDF2==3.0.1
+pandas==2.2.2
+
