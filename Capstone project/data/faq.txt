@@ -1,0 +1,8 @@
+Q: What is your customer support email?
+A: support@acme.example
+
+Q: What are your business hours?
+A: Monday–Friday, 9 AM–6 PM UTC
+
+Q: Where is your main office?
+A: 123 Main Street, New York, USA
