@@ -55,22 +55,23 @@ Build a small dashboard for tickets/analytics.
 ## Screenshots
 
 ### 1. Main Interface
-![Main UI](./Capstone%20project/screenshots/photo_2025-09-04%2002.33.30.jpeg)
+![Main UI](Capstone%20project/screenshots/photo_2025-09-04%2002.33.30.jpeg)
 
 ### 2. Asking a Question
-![Answer with Sources](./Capstone%20project/screenshots/photo_2025-09-04%2002.33.38.jpeg)
+![Answer with Sources](Capstone%20project/screenshots/photo_2025-09-04%2002.33.38.jpeg)
 
 ### 3. Ticket Form
-![Create Ticket Form](./Capstone%20project/screenshots/photo_2025-09-04%2002.33.49.jpeg)
+![Create Ticket Form](Capstone%20project/screenshots/photo_2025-09-04%2002.33.49.jpeg)
 
 ### 4. Ticket Submission
-![Ticket Created](./Capstone%20project/screenshots/photo_2025-09-04%2002.34.00.jpeg)
+![Ticket Created](Capstone%20project/screenshots/photo_2025-09-04%2002.34.00.jpeg)
 
 ### 5. GitHub Issue Example
-![GitHub Issue](./Capstone%20project/screenshots/photo_2025-09-04%2002.34.05.jpeg)
+![GitHub Issue](Capstone%20project/screenshots/photo_2025-09-04%2002.34.05.jpeg)
 
 ### 6. GitHub Issues List
-![GitHub Issues List](./Capstone%20project/screenshots/photo_2025-09-04%2002.34.10.jpeg)
+![GitHub Issues List](Capstone%20project/screenshots/photo_2025-09-04%2002.34.10.jpeg)
+
 
 
 
