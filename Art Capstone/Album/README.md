@@ -23,7 +23,7 @@ The result preserves the spirit of the original but introduces subtle variations
 **Technical Generation Details**
 - **Steps:** 50  
 - **CFG Scale:** 8.0  
-- **Sampler:** dpmpp_2m_karras  
+- **Sampler:** dpmpp_2m
 - **Scheduler:** normal  
 - **Resolution:** 1024 × 1024  
 - **Seed:** randomized  
