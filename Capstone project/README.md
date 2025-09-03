@@ -12,6 +12,12 @@ Tickets include:
 - Auto-label: `support`
 
 ---
+## What to improve
+Work on the replies (imrove research ingine)== Use a stronger embedding model for better search.  
+Add more ticket integrations (Jira, Trello).  
+Add multi-language support.  
+Store chat history in a database.  
+Build a small dashboard for tickets/analytics.  
 
 ## Files
 - `app.py` – main Streamlit app  
@@ -19,36 +25,6 @@ Tickets include:
 - `requirements.txt` – dependencies  
 - `runtime.txt` – Python version   
 - `data/` – folder with documents (PDF + TXT)  
-
----
-
-## How to install and run
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/annyswon/Advanced-Gen-AI.git
-   cd Advanced-Gen-AI
-   
-2. Create a virtual environment:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-
-4. Put your documents in the data/ folder (at least 3 docs, 2 PDFs, one large PDF).
-5. Run the app:
-   ```bash
-   streamlit run app.py
-
-## What to improve
-Work on the replies (imrove research ingine).  
-Add more ticket integrations (Jira, Trello).  
-Use a stronger embedding model for better search.  
-Add multi-language support.  
-Store chat history in a database.  
-Build a small dashboard for tickets/analytics.  
 
 ## Screenshots
 
@@ -69,7 +45,6 @@ Build a small dashboard for tickets/analytics.
 
 ### 6. GitHub Issues List
 ![GitHub Issues List](screenshots/photo_2025-09-04%2002.34.10.jpeg)
-
 
 
 
