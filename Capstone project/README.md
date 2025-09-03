@@ -49,3 +49,29 @@ Use a stronger embedding model for better search.
 Add multi-language support.  
 Store chat history in a database.  
 Build a small dashboard for tickets/analytics.  
+
+## Screenshots
+
+## Screenshots
+
+Here are some screenshots showing how the Customer Support Chat (RAG + GitHub Tickets) works:
+
+### Main Interface
+![Main UI](./screenshots/photo_2025-09-04_02.33.30.jpeg)
+
+### Asking a Question
+![Answer with Sources](./screenshots/photo_2025-09-04_02.33.38.jpeg)
+
+### Ticket Form
+![Create Ticket Form](./screenshots/photo_2025-09-04_02.33.49.jpeg)
+
+### Ticket Submission
+![Ticket Created](./screenshots/photo_2025-09-04_02.34.00.jpeg)
+
+### GitHub Issue Example
+![GitHub Issue](./screenshots/photo_2025-09-04_02.34.05.jpeg)
+
+### GitHub Issues List
+![GitHub Issues List](./screenshots/photo_2025-09-04_02.34.10.jpeg)
+
+
