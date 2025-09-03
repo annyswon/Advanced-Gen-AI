@@ -9,7 +9,8 @@ No cloud-hosted or external services (like Sora/Replicate) were used — only a 
 ![Original Vogue Cover](vogue_france_dec2024.jpg)
 
 ## AI-Generated Cover
-![Generated Vogue Cover](generated_vogue_cover.png)
+[Generated Vogue Cover](generated_vogue_cover.png)
+
 
 ## Workflow
 
