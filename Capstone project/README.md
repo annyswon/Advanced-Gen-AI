@@ -1,65 +1,51 @@
 # Customer Support Chatbot
 
-![Hugging Face Space](screenshot_hf_app.png)
-
-## Project Overview
-This project implements a **Customer Support Chatbot** that answers questions from company documents and car manuals.  
-If no answer is found, it allows the user to create a **support ticket**.  
-The solution is deployed on **Hugging Face Spaces** and built entirely with Python and Streamlit.  
-
-**Live Demo:**  
-[https://huggingface.co/spaces/AnnaSurkova/customer-support-chatbot](https://huggingface.co/spaces/AnnaSurkova/customer-support-chatbot)
-
-
-The chatbot:
-- Answers questions directly from PDF manuals and company documents.  
-- Cites the **document name and page number** when an answer is found.  
-- If no answer is found, suggests creating a **support ticket** (saved into a CSV or integrated into issue trackers).  
-- Keeps **conversation history** during the session.  
-- Knows about the company (name, contact info).  
+## What was done
+Built a customer support chatbot using **Streamlit**.  
+Connected it to documents with **RAG (Retrieval-Augmented Generation)**.  
+Added **citations** (file + page) in answers.  
+If no answer is found → suggests creating a **GitHub support ticket**.  
+Tickets include:
+- User name & email
+- Summary + description
+- Original user query
+- Auto-label: `support`
 
 ---
 
-## Tools and Technologies
-- **Language:** Python 3.11  
-- **Framework:** Streamlit (web UI)  
-- **Deployment:** Hugging Face Spaces (CPU free tier)  
-- **Libraries:**  
-  - PyPDF2 (PDF parsing)  
-  - Pandas (ticket logging, CSV export)  
-  - Streamlit (UI and chatbot logic)  
+## Files
+- `app.py` – main Streamlit app  
+- `tickets.py` – GitHub issue creation  
+- `requirements.txt` – dependencies  
+- `runtime.txt` – Python version   
+- `data/` – folder with documents (PDF + TXT)  
 
 ---
 
-## Data Sources
-At least 3 documents are used as required:
-1. `Ford-F-150-Owners-Manual.pdf` (400+ pages ✅)  
-2. `porsche-2017-macan-Owners-Manual.pdf` (PDF ✅)  
-3. `company_info.md` (company background & contacts)  
-4. `faq.txt` (optional Q&A dataset)  
+## How to install and run
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/annyswon/Advanced-Gen-AI.git
+   cd Advanced-Gen-AI
+   
+2. Create a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
 
----
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
 
-## Requirements Verification
+4. Put your documents in the data/ folder (at least 3 docs, 2 PDFs, one large PDF).
+5. Run the app:
+   ```bash
+   streamlit run app.py
 
-✔ **Business Features**  
-- User can ask questions via web chat.  
-- Answers come from local documents (PDFs, markdown, text).  
-- If no answer is found, the system suggests creating a **support ticket**.  
-- Support tickets include: user name, email, summary, description.  
-- Tickets stored locally (`tickets.csv`) — can be extended to Jira/Trello/GitHub Issues.  
-- System cites **document + page** when answering.  
-- Conversation history is supported.  
-- Company info is integrated (`company_info.md`).  
-
-✔ **Data Requirements**  
-- At least 3 data sources.  
-- At least 2 PDFs.  
-- One PDF has 400+ pages (Ford manual).  
-
-✔ **Technical Requirements**  
-- Built with Python.  
-- Requirements listed in `requirements.txt`.  
-- Runs with vector-like search over documents (string matching / can be extended to FAISS).  
-- Interface built in **Streamlit**.  
-- Hosted on **Hugging Face Spaces**.  
+## What to improve
+Work on the replies (imrove research ingine).  
+Add more ticket integrations (Jira, Trello).  
+Use a stronger embedding model for better search.  
+Add multi-language support.  
+Store chat history in a database.  
+Build a small dashboard for tickets/analytics.  
