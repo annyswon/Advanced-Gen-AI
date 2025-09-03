@@ -1,7 +1,7 @@
 ## Part 3 – Movie (DVD/VHS)
 
 ### Original Work
-![Original Oppenheimer Poster](oppenheimer_original.jpg)
+![Original Oppenheimer Poster](oppenheimer_original.jpeg)
 
 *Oppenheimer* is a 2023 epic biographical thriller directed by **Christopher Nolan**, based on the life of **J. Robert Oppenheimer**, the theoretical physicist often called the “father of the atomic bomb.”  
 Starring **Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr., and Florence Pugh**, the film explores Oppenheimer’s role in the Manhattan Project and the ethical consequences of creating nuclear weapons.  
