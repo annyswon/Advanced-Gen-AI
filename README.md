@@ -2,6 +2,6 @@
 
 This repo contains homework for the **Advanced Generative AI** course (ITPU - EPAM).  
 
-## Capstone Project – Customer Support Chatbot
-## AI Art Contest 
+1. Capstone Project – Customer Support Chatbot
+2. AI Art Contest 
 
