@@ -3,7 +3,6 @@
 ### Original Work
 ![Original Album – Nirvana Nevermind](original_nevermind.jpg)
 
----
 | Pipeline Screenshot | AI-Generated Cover |
 |---------------------|--------------------|
 | <img src="workflow_album.png"> | <img src="generated_nevermind.png"> |
@@ -21,7 +20,6 @@
 | <img src="Screenshot 2025-09-04 at 21.36.57.png"> | <img src="ComfyUI_00009_.png"> |
 | **Positive prompt:** photorealistic underwater album cover, baby swimming, floating dollar bill, clear blue pool water, cinematic lighting, iconic grunge album cover, highly detailed, realistic photography aesthetic <br><br> **Negative prompt:** cartoon, illustration, painting, blurry, distorted, text, watermark, deformed anatomy, unrealistic | **Workflow:** Steps: 25 • CFG: 6.0 • Sampler: dpmpp_2m • Scheduler: karras • Seed: 425698918098466 (fixed) • Denoise: 1.0 • Resolution: 512×512 • **LoRA:** [UNDERWATER_SCENE_v2](https://civitai.com/models/173332/cinematicpaintingxl) (strength: 0.60) • Checkpoint: `sdxl_base_1.0.safetensors` |
 
----
 
 ### Model
 
@@ -29,7 +27,6 @@
 - **File:** `sdxl_base_1.0.safetensors`  
 - **Source:** [Stable Diffusion XL Base 1.0 – Hugging Face](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
 
----
 
 ### Media Option
 - Chosen type: **Vinyl/CD Album Cover**  
