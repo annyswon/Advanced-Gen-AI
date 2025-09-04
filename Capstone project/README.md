@@ -26,25 +26,6 @@ Build a small dashboard for tickets/analytics.
 - `runtime.txt` – Python version   
 - `data/` – folder with documents (PDF + TXT)  
 
-## Screenshots
-
-### 1. Main Interface
-![Main UI](screenshots/photo_2025-09-04%2002.33.30.jpeg)
-
-### 2. Asking a Question
-![Answer with Sources](screenshots/photo_2025-09-04%2002.33.38.jpeg)
-
-### 3. Ticket Form
-![Create Ticket Form](screenshots/photo_2025-09-04%2002.33.49.jpeg)
-
-### 4. Ticket Submission
-![Ticket Created](screenshots/photo_2025-09-04%2002.34.00.jpeg)
-
-### 5. GitHub Issue Example
-![GitHub Issue](screenshots/photo_2025-09-04%2002.34.05.jpeg)
-
-### 6. GitHub Issues List
-![GitHub Issues List](screenshots/photo_2025-09-04%2002.34.10.jpeg)
 
 
 
