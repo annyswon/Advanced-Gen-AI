@@ -1,21 +1,11 @@
-## Part 3 – Movie (DVD/VHS)
+# Art Capstone – Movie
 
 ### Original Work
 ![Original Oppenheimer Poster](oppenheimer_original.jpeg)
 
-*Oppenheimer* is a 2023 epic biographical thriller directed by **Christopher Nolan**, based on the life of **J. Robert Oppenheimer**, the theoretical physicist often called the “father of the atomic bomb.”  
-Starring **Cillian Murphy, Emily Blunt, Matt Damon, Robert Downey Jr., and Florence Pugh**, the film explores Oppenheimer’s role in the Manhattan Project and the ethical consequences of creating nuclear weapons.  
-
-The original cover/poster captures a dramatic and fiery atmosphere, reflecting both the destructive power of the bomb and the weight of Oppenheimer’s moral burden.
-
----
 
 ### AI-Generated Cover
 ![Generated Oppenheimer DVD](oppenheimer_generated.png)
-
-The alternative cover reinterprets the visual mood of *Oppenheimer* through AI generation.  
-It preserves the core symbolism — a solitary figure, fire, and atomic energy — while experimenting with new textures, lighting, and surreal design elements.  
-This offers a fresh perspective on Nolan’s iconic imagery, balancing realism with artistic abstraction.
 
 ---
 
@@ -27,15 +17,40 @@ This offers a fresh perspective on Nolan’s iconic imagery, balancing realism w
 - **Source:** [Stable Diffusion XL Base 1.0 – Hugging Face](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
 
 **Technical Generation Details**
-- **Steps:** 45  
+- **Steps:** 41  
 - **CFG Scale:** 7.5  
-- **Sampler:** dpmpp_2m_karras  
+- **Sampler:** dpmpp_2m  
 - **Scheduler:** normal  
-- **Resolution:** 1024 × 1536  
 - **Seed:** randomized  
-- **Batch size:** 2  
-- **Denoise strength:** 0.55 (Img2Img with original poster as base)
+- **Batch size:** 1  
+- **Denoise strength:** 0.6 (Img2Img with original poster as base)
 
 **Prompt**
 
 *Positive prompt:*  
+dramatic DVD movie cover inspired by Oppenheimer, intense cinematic atmosphere, man in classic 1940s suit and fedora, glowing fire and atomic energy in background, surreal yet realistic, high detail, sharp photography, epic historical drama
+
+
+*Negative prompt:*  
+cartoon, anime, illustration, painting, blurry, low quality, text, watermark, distorted face, unrealistic anatomy
+
+
+**Pipeline Screenshot**  
+![ComfyUI Workflow](workflow_movie.png)
+
+---
+
+### Resources Used
+- **Environment:** ComfyUI running locally on macOS  
+- **System:** Apple MacBook Pro (M1 chip, 16 GB RAM)  
+- **Frameworks:** Python 3.11, ComfyUI v0.3.53  
+- **Model Source:** Hugging Face (Stable Diffusion XL Base 1.0)  
+- **Output directory:** `~/ComfyUI/output/`
+
+---
+
+### Media Option
+- Chosen type: **DVD/VHS Movie Cover**  
+- Original: *Oppenheimer (2023)*  
+- Generated: Alternative reinterpretation of *Oppenheimer* cover with Stable Diffusion XL  
+
