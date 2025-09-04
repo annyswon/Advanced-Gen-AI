@@ -23,9 +23,8 @@
 
 ---
 
-### Workflow
+### Model
 
-**Model**
 - **Model used:** Stable Diffusion XL Base 1.0  
 - **File:** `sdxl_base_1.0.safetensors`  
 - **Source:** [Stable Diffusion XL Base 1.0 – Hugging Face](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
