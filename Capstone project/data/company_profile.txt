@@ -1,3 +1,15 @@
 Acme Support
 Email: support@acme.example
 Phone: +1 (555) 010-0101
+Website: www.acme.example
+Headquarters: 123 Innovation Drive, San Francisco, CA, USA
+Business Hours:
+Monday–Friday: 9:00 AM – 6:00 PM (PST)
+Saturday: 10:00 AM – 2:00 PM (PST)
+Sunday: Closed
+Social Media:
+LinkedIn: linkedin.com/company/acme
+Twitter/X: twitter.com/acme
+Facebook: facebook.com/acme
+About Us:
+Acme is a trusted provider of innovative solutions and support services. Our team is dedicated to ensuring customer satisfaction through responsive service, reliable expertise, and continuous improvement.
